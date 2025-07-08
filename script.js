@@ -168,10 +168,12 @@ multiply_btn.addEventListener("click",
 );
 subtract_btn.addEventListener("click",
     function(){
-        // if(current_input === undefined || current_input === ""){
-        //     alert("Enter some number before doing oepration");
-        //     return;
-        // }
+        if(current_input.length >= 2){
+            if(current_input[current_input.length - 1] == '-' && operator_check( current_input[current_input.length - 2] )[0] == true) {
+                alert("Invalid Operator Configuration");
+                return;
+            }
+        }
 
         prev_input.push(current_input);
         current_input += '-' ;
@@ -224,7 +226,7 @@ let result_ans;
 // need to seperatly handle when last char of current_int is not a operator
 ans_btn.addEventListener("click",
     function(){
-        if(current_input === undefined || current_input === ""){
+        if( !current_input || current_input.length === 0){
             alert("Enter some number before doing oepration");
             return;
         }
@@ -263,33 +265,38 @@ ans_btn.addEventListener("click",
             }
 
 
-            if (i === current_input.length - 1) {
-                after_num = parseFloat(num_til_now);
+        }
 
-                if (before_num === undefined) {
-                    result_ans = after_num;
-                } else {
-                    result_ans = do_operation(before_num, after_num, latest_operator);
-                }
+        // now we will do final operation with last number afyer iterating everything
+        if(num_til_now != "") {
+            after_num = parseFloat(num_til_now);
 
-                display_text.innerHTML = `${result_ans}`;
-                clickSound.play();
-                display_text.style.transform = "scale(1.1)";
-                setTimeout(() => {
-                    display_text.style.transform = "scale(1)";
-                }, 150);
-
-                prev_input.push(current_input);
-                current_input = result_ans.toString();
-
-                num_til_now = "";
-                before_num = undefined;
-                after_num = undefined;
-                target_operation = undefined;
-                latest_operator = undefined;
-                result_ans = undefined;
+            if(before_num === undefined) {
+                result_ans = after_num;
+            }
+            else{
+                result_ans = do_operation(before_num, after_num, latest_operator);
             }
 
+            if (result_ans % 1 !== 0) {
+                result_ans = parseFloat(result_ans.toFixed(7)); // limit to 6 decimals
+            }
+
+            display_text.innerHTML = `${result_ans}`;
+            clickSound.play();
+            display_text.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                display_text.style.transform = "scale(1)";
+            }, 150);
+            prev_input.push(current_input);
+            current_input = result_ans.toString();
+
+            num_til_now = "";
+            before_num = undefined;
+            after_num = undefined;
+            target_operation = undefined;
+            latest_operator = undefined;
+            result_ans = undefined;
         }
     }
 );
