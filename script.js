@@ -108,7 +108,7 @@ del_btn.addEventListener("click",
 
 clear_btn.addEventListener("click", 
     function(){
-        if(current_input == undefined){
+        if(current_input == ""){
             alert("No prev state found");
             return;
         }
