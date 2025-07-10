@@ -1,4 +1,15 @@
 const clickSound = new Audio("click_2.mp3");
+const clickSound_new = new Audio("click.mp3");
+function play_click_sound(){
+    clickSound.pause();
+    clickSound.currentTime = 0;
+    clickSound.play();
+}
+function new_play_sound(){
+    clickSound_new.pause();
+    clickSound_new.currentTime = 0;
+    clickSound_new.play();
+}
 
 let display_text = document.querySelector(".display_result");
 
@@ -46,7 +57,7 @@ for(let i = 0 ; i <= 9 ; i++){
                 //current_input = parseFloat(current_input);
             }
             console.log(current_input);
-            clickSound.play();
+            play_click_sound();
             display_text.innerHTML = `${current_input} `;
             console.log(prev_input, current_input);
         }
@@ -73,7 +84,7 @@ dot_btn.addEventListener("click",
         else{
             current_input += '.' ;
         }
-        clickSound.play();
+        play_click_sound();
         display_text.innerHTML = `${current_input}`;
 
         console.log(prev_input, current_input);
@@ -87,12 +98,12 @@ del_btn.addEventListener("click",
             prev_input.pop();
             display_text.innerHTML = `${current_input}`;
             console.log(prev_input, current_input);
-            clickSound.play();
+            new_play_sound();
         }
         else if(current_input != undefined && current_input !== ""){
             current_input = "" ;
             display_text.innerHTML = "result display here" ;
-            clickSound.play();
+            play_click_sound();
             return;
         }
         else{
@@ -117,7 +128,7 @@ clear_btn.addEventListener("click",
         // current_input = temp_current_intput;
         current_input = "" ;
         display_text.innerHTML = "result display here" ;
-        clickSound.play();
+        new_play_sound();
 
         num_til_now = "";
         before_num = undefined;
@@ -145,7 +156,7 @@ divide_btn.addEventListener("click",
         current_input += '/' ;
         console.log(prev_input, current_input);
         display_text.innerHTML = `${current_input}` ;
-        clickSound.play();
+        new_play_sound();
     }
 );
 multiply_btn.addEventListener("click",
@@ -163,7 +174,7 @@ multiply_btn.addEventListener("click",
         current_input += '*' ;
         console.log(prev_input, current_input);
         display_text.innerHTML = `${current_input}` ;
-        clickSound.play();
+        new_play_sound();
     }
 );
 subtract_btn.addEventListener("click",
@@ -179,7 +190,7 @@ subtract_btn.addEventListener("click",
         current_input += '-' ;
         console.log(prev_input, current_input);
         display_text.innerHTML = `${current_input}` ;
-        clickSound.play();
+        new_play_sound();
     }
 );
 add_btn.addEventListener("click",
@@ -198,7 +209,7 @@ add_btn.addEventListener("click",
         current_input += '+' ;
         console.log(prev_input, current_input);
         display_text.innerHTML = `${current_input}` ;
-        clickSound.play();
+        new_play_sound();
     }
 );
 
@@ -283,11 +294,11 @@ ans_btn.addEventListener("click",
             }
 
             display_text.innerHTML = `${result_ans}`;
-            clickSound.play();
+            new_play_sound();
             display_text.style.transform = "scale(1.1)";
             setTimeout(() => {
                 display_text.style.transform = "scale(1)";
-            }, 150);
+            }, 250);
             prev_input.push(current_input);
             current_input = result_ans.toString();
 
