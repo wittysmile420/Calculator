@@ -62,5 +62,6 @@ window.addEventListener("keyup",
             ans_btn.click();
             return;
         }
+        alert("Enter A Valid Operator or Number On Keybard Or Use Calculator UI's Digital Buttons");
     }
 );
